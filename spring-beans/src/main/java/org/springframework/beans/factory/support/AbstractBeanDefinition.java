@@ -55,6 +55,7 @@ import org.springframework.util.StringUtils;
  * @see ChildBeanDefinition
  */
 @SuppressWarnings("serial")
+//BeanDefinition继承自AttributeAccessor,可以通过getAttribute方法获取一个属性
 public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccessor
 		implements BeanDefinition, Cloneable {
 

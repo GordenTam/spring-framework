@@ -63,6 +63,7 @@ abstract class ConfigurationClassUtils {
 	private static final Set<String> candidateIndicators = new HashSet<>(8);
 
 	static {
+		//这四个属性说明这个配置类是一个lite配置类
 		candidateIndicators.add(Component.class.getName());
 		candidateIndicators.add(ComponentScan.class.getName());
 		candidateIndicators.add(Import.class.getName());
@@ -112,9 +113,11 @@ abstract class ConfigurationClassUtils {
 			}
 		}
 
+		//判断是否是一个full配置类(被@Configuration注解)
 		if (isFullConfigurationCandidate(metadata)) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_FULL);
 		}
+		//判断是否是一个lite配置类(被@Component @ComponentScan @Import @ImportResource注解)
 		else if (isLiteConfigurationCandidate(metadata)) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_LITE);
 		}

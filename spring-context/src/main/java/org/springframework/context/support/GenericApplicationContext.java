@@ -91,6 +91,7 @@ import org.springframework.util.Assert;
  * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
  * @see org.springframework.beans.factory.support.PropertiesBeanDefinitionReader
  */
+//AnnotationConfigApplicationContext和WebApplicationContext都继承GenericApplicationContext,构造函数中默认的BeanFactory就是DefaultListableBeanFactory
 public class GenericApplicationContext extends AbstractApplicationContext implements BeanDefinitionRegistry {
 
 	private final DefaultListableBeanFactory beanFactory;
