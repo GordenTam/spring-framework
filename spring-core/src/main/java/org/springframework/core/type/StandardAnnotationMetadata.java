@@ -38,8 +38,10 @@ import org.springframework.util.MultiValueMap;
  * @author Sam Brannen
  * @since 2.5
  */
+//代表一个类所有的注解metedata
 public class StandardAnnotationMetadata extends StandardClassMetadata implements AnnotationMetadata {
 
+	//该类所有的annotion
 	private final Annotation[] annotations;
 
 	private final boolean nestedAnnotationsAsMap;
