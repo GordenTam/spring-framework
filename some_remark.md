@@ -1,6 +1,10 @@
+#AnnotationConfigApplicationContext原理:
+AnnotationConfigApplicationContext(注解配置应用上下文)负责解析注解配置的spring容器,及通过@Configuration配置的spring。
+其包含两个字段AnnotatedBeanDefinitionReader reader,ClassPathBeanDefinitionScanner
 //applicationContext refresh之invokeBeanFactoryPostProcessors原理
-ApplicationContext初始化时,
+1.什么是PostProcessors
 
 使用内置的ConfigurationClassPostProcessor处理Beanfactory。在ConfigurationClassPostProcessor中，先获取beanfactory中所有被注册的bean，
 找到带有@Configuration注解的类(full配置类)，这些类就是配置类。
 然后使用ConfigurationClassParser解析这些被@Configuration注解的BeanDefination
+

@@ -1,4 +1,4 @@
-package tgz;
+package spring.annotation;
 
 public class tgz {
     public String getAbc() {

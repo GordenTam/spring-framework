@@ -1,4 +1,4 @@
-package tgz;
+package spring.annotation;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
