@@ -56,7 +56,7 @@ final class PostProcessorRegistrationDelegate {
 			ConfigurableListableBeanFactory beanFactory, List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
 
 		// Invoke BeanDefinitionRegistryPostProcessors first, if any.
-		// 在传入的这些BeanFactoryPostProcessor中首先调用BeanDefinitionRegistryPostProcessor类型的后置处理器,BeanDefinitionRegistryPostProcessor
+		// 在传入的这些BeanFactoryPostProcessor中首先调用BeanDefinitionRegistryPostProcessor类型的后置处理器,BeanDefinitionRegistryPostProcessor负责后置处理已经注册的BeanDefination
 		Set<String> processedBeans = new HashSet<>();
 
 		if (beanFactory instanceof BeanDefinitionRegistry) {

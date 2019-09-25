@@ -459,6 +459,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 	/**
 	 * A single segment used to divide the map to allow better concurrent performance.
 	 */
+	//分段锁
 	@SuppressWarnings("serial")
 	protected final class Segment extends ReentrantLock {
 

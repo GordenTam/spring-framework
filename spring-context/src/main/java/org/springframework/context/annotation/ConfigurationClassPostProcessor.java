@@ -313,6 +313,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		}
 
 		// Parse each @Configuration class
+		//真正负责解析配置类的就是ConfigurationClassParser，即ConfigurationClassPostProcessor负责找出Bean工厂中那些注册的带有@Configuration,然后ConfigurationClassParser解析这些配置类
 		ConfigurationClassParser parser = new ConfigurationClassParser(
 				this.metadataReaderFactory, this.problemReporter, this.environment,
 				this.resourceLoader, this.componentScanBeanNameGenerator, registry);

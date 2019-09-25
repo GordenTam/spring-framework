@@ -36,7 +36,7 @@ import org.springframework.util.MultiValueMap;
  * @see AnnotationMetadata
  * @see MethodMetadata
  */
-public interface AnnotatedTypeMetadata {
+public interface  AnnotatedTypeMetadata {
 
 	/**
 	 * Determine whether the underlying element has an annotation or meta-annotation

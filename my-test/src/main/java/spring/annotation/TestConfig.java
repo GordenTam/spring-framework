@@ -1,13 +1,12 @@
 package spring.annotation;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 //import org.springframework.core.annotation.Order;
 
 @Configuration
 @Scope("prototype")
+@ComponentScan
+@Import(Config2.class)
 public class TestConfig {
     @Bean
 //    @Order(1)
