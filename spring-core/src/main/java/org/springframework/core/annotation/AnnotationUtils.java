@@ -1854,6 +1854,7 @@ public abstract class AnnotationUtils {
 	 * type (never {@code null}, though potentially <em>empty</em>)
 	 * @since 4.2
 	 */
+	//
 	static List<Method> getAttributeMethods(Class<? extends Annotation> annotationType) {
 		List<Method> methods = attributeMethodsCache.get(annotationType);
 		if (methods != null) {

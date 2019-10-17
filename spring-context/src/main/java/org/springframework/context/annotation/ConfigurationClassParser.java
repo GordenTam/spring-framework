@@ -264,8 +264,11 @@ class ConfigurationClassParser {
 			throws IOException {
 
 		//解析@Component注解
+		//StandardAnnotationMetadata 实际上是使用AnnotationElementUtils.isAnnotated来判断的。实际上是使用AnnotationElementUtils.isAnnotated来判断的。该方法扩展了jdk原有的接口，能直接判断是否被元注解注解
+		//配置类如果被@Component注解
 		if (configClass.getMetadata().isAnnotated(Component.class.getName())) {
 			// Recursively process any member (nested) classes first
+			//啥意思
 			processMemberClasses(configClass, sourceClass);
 		}
 
@@ -532,6 +535,7 @@ class ConfigurationClassParser {
 	 * @param visited used to track visited classes to prevent infinite recursion
 	 * @throws IOException if there is any problem reading metadata from the named class
 	 */
+	//这里就是一个递归,递归解析所有非jvm的注解,收集import注解
 	private void collectImports(SourceClass sourceClass, Set<SourceClass> imports, Set<SourceClass> visited)
 			throws IOException {
 
@@ -560,16 +564,20 @@ class ConfigurationClassParser {
 			this.importStack.push(configClass);
 			try {
 				for (SourceClass candidate : importCandidates) {
+					//如果是importSelector的实现的话
 					if (candidate.isAssignable(ImportSelector.class)) {
 						// Candidate class is an ImportSelector -> delegate to it to determine imports
+						//实例化
 						Class<?> candidateClass = candidate.loadClass();
 						ImportSelector selector = BeanUtils.instantiateClass(candidateClass, ImportSelector.class);
+						//如果selector如果也继承了environmentAware resourceLoaderAware等接口的话,则调用这些接口
 						ParserStrategyUtils.invokeAwareMethods(
 								selector, this.environment, this.resourceLoader, this.registry);
 						if (selector instanceof DeferredImportSelector) {
 							this.deferredImportSelectorHandler.handle(configClass, (DeferredImportSelector) selector);
 						}
 						else {
+							//调用selector.selectImport 参数为当前sourceClass
 							String[] importClassNames = selector.selectImports(currentSourceClass.getMetadata());
 							Collection<SourceClass> importSourceClasses = asSourceClasses(importClassNames);
 							processImports(configClass, currentSourceClass, importSourceClasses, false);
@@ -909,6 +917,7 @@ class ConfigurationClassParser {
 	 * Simple wrapper that allows annotated source classes to be dealt with
 	 * in a uniform manner, regardless of how they are loaded.
 	 */
+	//简单包装一个被注解注释的类，而不用考虑他是如何被加载的
 	private class SourceClass implements Ordered {
 
 		private final Object source;  // Class or MetadataReader
@@ -1018,6 +1027,7 @@ class ConfigurationClassParser {
 			return result;
 		}
 
+		//获取一个起源类的所有非jvm定义的注解,并构造成SourceClass返回
 		public Set<SourceClass> getAnnotations() {
 			Set<SourceClass> result = new LinkedHashSet<>();
 			if (this.source instanceof Class) {

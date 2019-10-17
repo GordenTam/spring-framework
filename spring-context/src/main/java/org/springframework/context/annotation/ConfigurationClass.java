@@ -47,6 +47,7 @@ import org.springframework.util.ClassUtils;
  * @see BeanMethod
  * @see ConfigurationClassParser
  */
+//配置类对象
 final class ConfigurationClass {
 
 	private final AnnotationMetadata metadata;

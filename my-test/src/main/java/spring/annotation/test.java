@@ -8,7 +8,7 @@ import java.time.ZoneOffset;
 
 public class test{
     public static void main(String[]args){
-//        ApplicationContext ac =new AnnotationConfigApplicationContext(TestConfig.class);
-		System.out.println(LocalDateTime.now().toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
+        ApplicationContext ac =new AnnotationConfigApplicationContext(TestConfig.class);
+//		System.out.println(LocalDateTime.now().toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
     }
 }

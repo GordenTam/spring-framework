@@ -257,9 +257,9 @@ public abstract class AnnotatedElementUtils {
 	 * @see #hasAnnotation(AnnotatedElement, Class)
 	 */
 
-	//直接调用jdk的方法，判断某个AnnotatedElement是否含有某个注解
 	public static boolean isAnnotated(AnnotatedElement element, Class<? extends Annotation> annotationType) {
 		// Shortcut: directly present on the element, with no processing needed?
+		//直接调用jdk的方法，判断某个AnnotatedElement是否含有某个注解
 		if (element.isAnnotationPresent(annotationType)) {
 			return true;
 		}
