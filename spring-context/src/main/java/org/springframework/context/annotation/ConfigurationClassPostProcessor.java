@@ -321,6 +321,8 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		Set<BeanDefinitionHolder> candidates = new LinkedHashSet<>(configCandidates);
 		Set<ConfigurationClass> alreadyParsed = new HashSet<>(configCandidates.size());
 		do {
+			//递归解析配置类,最终将所有配置类解析之后放到ConfigurationClassParser的configurationClasses列表中去
+			//从源头配置类向下递归查找,找出所有配置类,最终都以ConfigurationClass对象表示,(被@Configuration注解的类,被@Component注解的类,被import导入的类,@ComponentScan扫描进来的类,被@Bean注解的方法的返回)
 			parser.parse(candidates);
 			parser.validate();
 
@@ -328,11 +330,13 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 			configClasses.removeAll(alreadyParsed);
 
 			// Read the model and create bean definitions based on its content
+			// 使用ConfigurationClassBeanDefinitionReader将配置类转换成BeanDefination
 			if (this.reader == null) {
 				this.reader = new ConfigurationClassBeanDefinitionReader(
 						registry, this.sourceExtractor, this.resourceLoader, this.environment,
 						this.importBeanNameGenerator, parser.getImportRegistry());
 			}
+			//这里加载配置类的Bean定义,将配置类作为BeanDefinition注册到应用上下文中
 			this.reader.loadBeanDefinitions(configClasses);
 			alreadyParsed.addAll(configClasses);
 

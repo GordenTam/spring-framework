@@ -309,6 +309,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @Import annotations
+		// 首先递归的查找configClass下所有的@Import注解,获取其value然后解析这些类
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 
 		// Process any @ImportResource annotations
@@ -596,6 +597,7 @@ class ConfigurationClassParser {
 					else {
 						// Candidate class not an ImportSelector or ImportBeanDefinitionRegistrar ->
 						// process it as an @Configuration class
+						// 如果不是importSelector或者实现类,则将其作为ConfigurationClass解析
 						this.importStack.registerImport(
 								currentSourceClass.getMetadata(), candidate.getMetadata().getClassName());
 						processConfigurationClass(candidate.asConfigClass(configClass));
