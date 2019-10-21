@@ -10,6 +10,7 @@ import org.springframework.core.type.AnnotationMetadata;
 
 public class EnableTestImportSelector implements ImportSelector {
 	public String[] selectImports(AnnotationMetadata importingClassMetadata){
+		System.out.println(importingClassMetadata.getAnnotationAttributes(EnableTest.class.getName(),true));
 		return new String[]{"spring.annotation.testimport.Banana"};
 	}
 }

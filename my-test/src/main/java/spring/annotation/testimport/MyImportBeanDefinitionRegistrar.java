@@ -12,6 +12,7 @@ import org.springframework.core.type.AnnotationMetadata;
 
 public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry){
+		System.out.println(importingClassMetadata.getAnnotationAttributes(EnableImportBeanDefinitionRigistrarTest.class.getName(),true));
 		registry.registerBeanDefinition("spring.annotation.testimport.Peer",new RootBeanDefinition(Peer.class));
 	}
 }
