@@ -173,6 +173,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 	/** Environment used by this context. */
 	@Nullable
+	// 应用上下文的环境
 	private ConfigurableEnvironment environment;
 
 	/** BeanFactoryPostProcessors to apply on refresh. */
@@ -379,6 +380,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @param eventType the resolved event type, if known
 	 * @since 4.2
 	 */
+	// 发布事件，委托给处理SimpleApplicationEventMulticaster
 	protected void publishEvent(Object event, @Nullable ResolvableType eventType) {
 		Assert.notNull(event, "Event must not be null");
 
@@ -515,9 +517,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
+			// 准备刷新，实例化应用上下文Environment, 实例化Bean工厂，默认为StandardEnvironment, 如果为
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
+			// 准备刷新，实例化应用上下文Environment
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
@@ -537,6 +541,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				//初始化ApplicationEventMulticaster,默认为SimpleApplicationEventMulticaster,负责广播ApplicationEvent
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.

@@ -1,0 +1,2 @@
+spring.annotation.bean_import
+spring.annotation.conditional
